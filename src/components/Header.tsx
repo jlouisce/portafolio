@@ -15,7 +15,7 @@ function go(id: string) {
 export default function Header() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="fixed inset-x-0 top-0 z-50 text-[#ece7dd] mix-blend-difference">
+    <header className="fixed inset-x-0 top-0 z-50 bg-background/75 text-foreground backdrop-blur-md">
       <div className="flex items-center justify-between px-6 py-5 md:px-10">
         <a href="#" className="font-serif text-2xl tracking-tight">{site.short}<span className="text-accent">.</span></a>
         <nav className="hidden gap-8 font-mono text-xs uppercase tracking-widest lg:flex" aria-label="Principal">
@@ -28,7 +28,7 @@ export default function Header() {
         </button>
       </div>
       {open && (
-        <div className="fixed inset-0 -z-10 flex flex-col justify-center gap-4 bg-[#0b0b0a] px-6 lg:hidden">
+        <div className="fixed inset-0 -z-10 flex flex-col justify-center gap-4 bg-background px-6 lg:hidden">
           {nav.map((n, i) => (
             <button key={n.id} onClick={() => { setOpen(false); go(n.id); }} className="text-left font-serif text-5xl">
               <span className="mr-3 font-mono text-xs text-accent">0{i + 1}</span>{n.label}

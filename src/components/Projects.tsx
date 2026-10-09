@@ -18,7 +18,7 @@ export default function Projects() {
           <button
             key={x}
             onClick={() => setF(x)}
-            className={`rounded-full border px-4 py-2 transition ${f === x ? "border-accent bg-accent text-black" : "border-line text-muted hover:text-foreground"}`}
+            className={`rounded-full border px-4 py-2 transition ${f === x ? "border-foreground bg-foreground text-background" : "border-line text-muted hover:text-foreground"}`}
           >
             {x}
           </button>
@@ -29,11 +29,11 @@ export default function Projects() {
           <article key={p.slug} data-r className={`group relative ${spans[i % spans.length]}`}>
             <Link href={`/proyectos/${p.slug}`} className="absolute inset-0 z-10" aria-label={`Ver ${p.title}`} />
             <div
-              className="relative aspect-[4/3] overflow-hidden bg-[#141413]"
-              style={{ backgroundImage: `radial-gradient(circle at 30% 20%, hsl(${p.hue} 70% 45% / .55), transparent 60%)` }}
+              className="relative aspect-[4/3] overflow-hidden bg-stone"
+              style={{ backgroundImage: `radial-gradient(circle at 30% 20%, hsl(${36 + (p.hue % 12)} 60% ${52 + (p.hue % 18)}% / .5), transparent 60%)` }}
             >
-              <span className="absolute left-4 top-4 font-mono text-xs text-foreground/70">0{i + 1}</span>
-              <div className="absolute inset-0 flex items-center justify-center font-mono text-xs uppercase tracking-widest opacity-0 transition duration-500 group-hover:bg-black/50 group-hover:opacity-100">
+              <span className="absolute left-4 top-4 font-mono text-xs text-foreground/60">0{i + 1}</span>
+              <div className="absolute inset-0 flex items-center justify-center font-mono text-xs uppercase tracking-widest opacity-0 transition duration-500 group-hover:bg-black/55 group-hover:text-white group-hover:opacity-100">
                 Ver proyecto →
               </div>
             </div>

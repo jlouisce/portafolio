@@ -18,6 +18,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es" className={`${sans.variable} ${mono.variable} ${serif.variable} antialiased`}>
       <body>
+        <div className="marble-clouds" aria-hidden="true" />
+        <div className="marble-veins" aria-hidden="true" />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

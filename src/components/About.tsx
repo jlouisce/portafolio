@@ -8,8 +8,8 @@ export default function About() {
       <Reveal className="grid gap-12 md:grid-cols-12">
         <div
           data-r
-          className="aspect-[4/5] bg-[#141413] md:col-span-4"
-          style={{ backgroundImage: "radial-gradient(circle at 50% 30%, rgba(214,255,63,.25), transparent 65%)" }}
+          className="aspect-[4/5] bg-stone md:col-span-4"
+          style={{ backgroundImage: "radial-gradient(circle at 50% 30%, rgba(217,184,102,.45), transparent 65%)" }}
           role="img"
           aria-label="Foto (placeholder)"
         />

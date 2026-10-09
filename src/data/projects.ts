@@ -6,9 +6,20 @@ export type Project = {
   stack: string[];
   summary: string;
   hue: number; // placeholder visual hasta tener capturas reales
+  repo?: string;
 };
 
 export const projects: Project[] = [
+  {
+    slug: "nextdocker",
+    title: "NextDocker",
+    year: "2026",
+    type: "E-commerce",
+    stack: ["React", "Vite", "Tailwind", "React Router"],
+    summary: "Marketplace global de contenedores marítimos: el comprador puede cambiar el puerto de origen desde el carrito para ahorrar en flete o llegar más rápido. MVP de frontend con datos de ejemplo; Supabase, Firebase y una API de fletes están planeados.",
+    hue: 210,
+    repo: "https://github.com/jlouisce/NextDocker",
+  },
   {
     slug: "cloudemed",
     title: "CloudeMed",
