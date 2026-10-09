@@ -1,3 +1,5 @@
+import Intro from "@/components/Intro";
+import ScrollUpGate from "@/components/ScrollUpGate";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Philosophy from "@/components/Philosophy";
@@ -11,6 +13,8 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
+      <Intro />
+      <ScrollUpGate />
       <Header />
       <main>
         <Hero />

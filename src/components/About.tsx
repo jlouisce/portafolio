@@ -1,24 +1,27 @@
-import { site, experience } from "@/data/site";
+"use client";
+import { site } from "@/data/site";
 import Section from "./Section";
 import Reveal from "./Reveal";
+import { useLang } from "./LanguageProvider";
 
 export default function About() {
+  const { t } = useLang();
   return (
-    <Section id="sobre-mi" index="05" title="Sobre mí">
+    <Section id="sobre-mi" index="05" title={t.sections.about}>
       <Reveal className="grid gap-12 md:grid-cols-12">
         <div
           data-r
           className="aspect-[4/5] bg-stone md:col-span-4"
           style={{ backgroundImage: "radial-gradient(circle at 50% 30%, rgba(217,184,102,.45), transparent 65%)" }}
           role="img"
-          aria-label="Foto (placeholder)"
+          aria-label="Photo (placeholder)"
         />
         <div className="md:col-span-7 md:col-start-6">
-          {site.bio.map((b) => (
-            <p key={b} data-r className="mb-6 font-serif text-3xl leading-snug md:text-4xl">{b}</p>
+          {t.about.bio.map((b, i) => (
+            <p key={i} data-r className="mb-6 font-serif text-3xl leading-snug md:text-4xl">{b}</p>
           ))}
           <ul data-r className="mt-12 border-b border-line">
-            {experience.map((e) => (
+            {t.experience.map((e) => (
               <li key={e.org} className="grid gap-1 border-t border-line py-4 md:grid-cols-12">
                 <span className="font-mono text-xs uppercase tracking-widest text-muted md:col-span-4">{e.period}</span>
                 <span className="font-serif text-2xl md:col-span-4">{e.org}</span>
@@ -26,12 +29,13 @@ export default function About() {
               </li>
             ))}
           </ul>
-          <a data-r href={site.cv} target="_blank" rel="noreferrer" className="mt-8 inline-block font-mono text-xs uppercase tracking-widest text-accent hover:underline">Ver CV completo ↗</a>
+          <a data-r href={site.cv} target="_blank" rel="noreferrer" className="mt-8 inline-block font-mono text-xs uppercase tracking-widest text-accent hover:underline">{t.about.cv}</a>
           <div data-r className="mt-12 flex flex-wrap gap-2">
             {site.stack.map((s) => (
               <span key={s} className="rounded-full border border-line px-4 py-2 font-mono text-xs uppercase tracking-widest text-muted">{s}</span>
             ))}
           </div>
+          <p data-r className="mt-8 font-mono text-xs uppercase tracking-widest text-muted">{t.about.languages}</p>
         </div>
       </Reveal>
     </Section>
