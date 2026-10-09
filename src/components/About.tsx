@@ -10,12 +10,13 @@ export default function About() {
   return (
     <Section id="sobre-mi" index="05" title={t.sections.about}>
       <Reveal className="grid gap-12 md:grid-cols-12">
-        <div data-r className="relative aspect-[4/5] self-start overflow-hidden bg-stone md:sticky md:top-28 md:col-span-4">
+        <div data-r className="relative aspect-[4/5] w-full max-w-[280px] self-start overflow-hidden bg-stone md:col-span-4">
           <Image
             src="/jonnathan.jpg"
             alt={site.name}
             fill
-            sizes="(min-width: 768px) 33vw, 100vw"
+            quality={90}
+            sizes="280px"
             className="object-cover object-[50%_32%]"
           />
           <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/10" aria-hidden="true" />
