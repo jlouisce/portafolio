@@ -10,7 +10,7 @@ export default function About() {
   return (
     <Section id="sobre-mi" index="05" title={t.sections.about}>
       <Reveal className="grid gap-12 md:grid-cols-12">
-        <div data-r className="relative aspect-[4/5] w-full max-w-[280px] self-start overflow-hidden bg-stone md:col-span-4">
+        <div data-r className="relative aspect-[4/5] w-full max-w-[280px] self-start justify-self-center overflow-hidden bg-stone md:sticky md:top-28 md:col-span-4">
           <Image
             src="/jonnathan.jpg"
             alt={site.name}
