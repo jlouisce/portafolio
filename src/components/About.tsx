@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { site } from "@/data/site";
 import Section from "./Section";
 import Reveal from "./Reveal";
@@ -9,13 +10,16 @@ export default function About() {
   return (
     <Section id="sobre-mi" index="05" title={t.sections.about}>
       <Reveal className="grid gap-12 md:grid-cols-12">
-        <div
-          data-r
-          className="aspect-[4/5] bg-stone md:col-span-4"
-          style={{ backgroundImage: "radial-gradient(circle at 50% 30%, rgba(217,184,102,.45), transparent 65%)" }}
-          role="img"
-          aria-label="Photo (placeholder)"
-        />
+        <div data-r className="relative aspect-[4/5] self-start overflow-hidden bg-stone md:sticky md:top-28 md:col-span-4">
+          <Image
+            src="/jonnathan.jpg"
+            alt={site.name}
+            fill
+            sizes="(min-width: 768px) 33vw, 100vw"
+            className="object-cover object-[50%_32%]"
+          />
+          <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/10" aria-hidden="true" />
+        </div>
         <div className="md:col-span-7 md:col-start-6">
           {t.about.bio.map((b, i) => (
             <p key={i} data-r className="mb-6 font-serif text-3xl leading-snug md:text-4xl">{b}</p>

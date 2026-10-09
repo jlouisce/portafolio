@@ -4,7 +4,8 @@ export type Content = {
   nav: { id: string; label: string }[];
   menu: { open: string; close: string };
   intro: { words: string[]; hint: string; pre: string; em: string };
-  hero: { lines: string[]; tagline: string; scroll: string };
+  hero: { lines: string[]; tagline: string; scroll: string; cv: string };
+  philosophyLead: string;
   sections: { philosophy: string; projects: string; services: string; process: string; about: string; contact: string };
   pillars: { title: string; text: string }[];
   projects: {
@@ -17,11 +18,17 @@ export type Content = {
     stack: string;
     code: string;
   };
-  services: { title: string; scope: string[] }[];
+  services: {
+    headline: string;
+    em: string;
+    lead: string;
+    items: { title: string; text: string; tags: string[] }[];
+    cta: string;
+  };
   process: { stage: string; title: string; text: string }[];
   experience: { role: string; org: string; period: string }[];
   about: { bio: string[]; cv: string; languages: string };
-  contact: { title: string; location: string };
+  contact: { title: string; lead: string; location: string; email: string };
   footer: { top: string };
 };
 
@@ -46,7 +53,9 @@ export const content: Record<Lang, Content> = {
       lines: ["From wireframe", "to production,", "with intent."],
       tagline: "From wireframe to production.",
       scroll: "Scroll ↓",
+      cv: "View Resume ↗",
     },
+    philosophyLead: "Three principles behind every project I build.",
     sections: {
       philosophy: "Philosophy",
       projects: "Projects",
@@ -56,9 +65,9 @@ export const content: Record<Lang, Content> = {
       contact: "Let's talk",
     },
     pillars: [
-      { title: "Design", text: "Wireframes, flows and screens that developers can implement directly. The experience is thought through before the code." },
-      { title: "Engineering", text: "Typed code, well-modeled data and cloud infrastructure. Products that grow from one user to many." },
-      { title: "Detail", text: "Performance, accessibility and motion crafted down to the last pixel. The best work is the work you don't notice." },
+      { title: "Versatility", text: "From online stores to data platforms, from landing pages to SaaS. I move across the stack and across industries, so the tool always fits the problem, never the other way around." },
+      { title: "Perfection", text: "Details are not decoration. Typography, spacing, motion and edge cases get the same care as the architecture, because the small things are what people remember." },
+      { title: "Efficiency", text: "Clean, typed, maintainable code and sensible infrastructure. Fast to load, fast to ship and cheap to run: results without wasted effort." },
     ],
     projects: {
       filters: { all: "All", web: "Web", app: "App", ecommerce: "E-commerce" },
@@ -70,12 +79,20 @@ export const content: Record<Lang, Content> = {
       stack: "Stack",
       code: "View code on GitHub ↗",
     },
-    services: [
-      { title: "SaaS products", scope: ["Multi-tenant architecture", "Next.js · Node.js · PostgreSQL", "AWS and Docker"] },
-      { title: "Websites & e-commerce", scope: ["Custom design and development", "React · Next.js · Tailwind", "Deployment and hosting"] },
-      { title: "UI/UX design", scope: ["Wireframes and prototypes in Figma", "User flows", "Developer handoff"] },
-      { title: "Automation & AI", scope: ["Python and API tools", "AI agents in development workflows", "Data pipelines"] },
-    ],
+    services: {
+      headline: "Any software need,",
+      em: "solved.",
+      lead: "I build websites of every kind, from e-commerce stores to data-management software. Whatever you need built, I can take it from idea to production.",
+      items: [
+        { title: "E-commerce & online stores", text: "Catalogs, carts, payments and logistics, built to sell and to scale.", tags: ["Next.js", "Payments", "Supabase"] },
+        { title: "Websites & landing pages", text: "Corporate sites, portfolios and campaign pages: fast, accessible and unmistakably yours.", tags: ["React", "Tailwind", "SEO"] },
+        { title: "Data & management software", text: "Dashboards, internal tools and reporting systems that turn raw data into decisions.", tags: ["PostgreSQL", "Python", "APIs"] },
+        { title: "Web apps & SaaS", text: "Multi-tenant platforms with authentication, roles and billing, from MVP to production.", tags: ["Node.js", "AWS", "Docker"] },
+        { title: "Automation & integrations", text: "Scripts, APIs and AI agents that remove repetitive work and connect your tools.", tags: ["Python", "REST", "AI agents"] },
+        { title: "UI/UX design", text: "Wireframes, prototypes and design systems in Figma, ready for development.", tags: ["Figma", "Prototyping", "Handoff"] },
+      ],
+      cta: "Don't see your need? Tell me about it →",
+    },
     process: [
       { stage: "Discover", title: "Understand the problem", text: "Requirements, users and goals before drawing or coding anything." },
       { stage: "Design", title: "Wireframe to high fidelity", text: "Flows and screens in Figma, ready to implement." },
@@ -98,7 +115,12 @@ export const content: Record<Lang, Content> = {
       cv: "View full CV ↗",
       languages: "Spanish native · English C2",
     },
-    contact: { title: "Let's talk", location: "Cali, Colombia · Remote" },
+    contact: {
+      title: "Let's talk",
+      lead: "Have a project or an idea? Tell me about it. I'd love to hear what you want to build.",
+      location: "Cali, Colombia · Remote",
+      email: "Write me an email",
+    },
     footer: { top: "Back to top ↑" },
   },
   es: {
@@ -121,7 +143,9 @@ export const content: Record<Lang, Content> = {
       lines: ["Del wireframe", "a producción,", "con intención."],
       tagline: "Del wireframe a producción.",
       scroll: "Scroll ↓",
+      cv: "Ver CV ↗",
     },
+    philosophyLead: "Tres principios detrás de cada proyecto que construyo.",
     sections: {
       philosophy: "Filosofía",
       projects: "Proyectos",
@@ -131,9 +155,9 @@ export const content: Record<Lang, Content> = {
       contact: "Hablemos",
     },
     pillars: [
-      { title: "Diseño", text: "Wireframes, flujos y pantallas que los desarrolladores pueden implementar directamente. La experiencia se piensa antes del código." },
-      { title: "Ingeniería", text: "Código tipado, datos bien modelados e infraestructura en la nube. Productos que crecen de un usuario a muchos." },
-      { title: "Detalle", text: "Rendimiento, accesibilidad y movimiento cuidados hasta el último píxel. Lo mejor es lo que no estorba." },
+      { title: "Versatilidad", text: "De tiendas en línea a plataformas de datos, de landing pages a SaaS. Me muevo por todo el stack y por distintas industrias, para que la herramienta siempre se ajuste al problema y nunca al revés." },
+      { title: "Perfección", text: "Los detalles no son decoración. La tipografía, el espaciado, el movimiento y los casos límite reciben el mismo cuidado que la arquitectura, porque lo pequeño es lo que la gente recuerda." },
+      { title: "Eficiencia", text: "Código limpio, tipado y mantenible, e infraestructura sensata. Rápido de cargar, rápido de entregar y barato de operar: resultados sin esfuerzo desperdiciado." },
     ],
     projects: {
       filters: { all: "Todos", web: "Web", app: "App", ecommerce: "E-commerce" },
@@ -145,12 +169,20 @@ export const content: Record<Lang, Content> = {
       stack: "Stack",
       code: "Ver código en GitHub ↗",
     },
-    services: [
-      { title: "Productos SaaS", scope: ["Arquitectura multi-tenant", "Next.js · Node.js · PostgreSQL", "AWS y Docker"] },
-      { title: "Sitios y e-commerce", scope: ["Diseño y desarrollo a medida", "React · Next.js · Tailwind", "Despliegue y hosting"] },
-      { title: "Diseño UI/UX", scope: ["Wireframes y prototipos en Figma", "Flujos de usuario", "Handoff a desarrollo"] },
-      { title: "Automatización e IA", scope: ["Herramientas con Python y APIs", "Agentes de IA en flujos de desarrollo", "Pipelines de datos"] },
-    ],
+    services: {
+      headline: "Cualquier necesidad de software,",
+      em: "resuelta.",
+      lead: "Creo sitios web de todo tipo, desde tiendas e-commerce hasta software de manejo de datos. Sea lo que necesites construir, puedo llevarlo de la idea a producción.",
+      items: [
+        { title: "E-commerce y tiendas en línea", text: "Catálogos, carritos, pagos y logística, pensados para vender y escalar.", tags: ["Next.js", "Pagos", "Supabase"] },
+        { title: "Sitios web y landing pages", text: "Sitios corporativos, portafolios y páginas de campaña: rápidos, accesibles y inconfundiblemente tuyos.", tags: ["React", "Tailwind", "SEO"] },
+        { title: "Software de datos y gestión", text: "Dashboards, herramientas internas y sistemas de reportes que convierten datos en decisiones.", tags: ["PostgreSQL", "Python", "APIs"] },
+        { title: "Apps web y SaaS", text: "Plataformas multi-tenant con autenticación, roles y facturación, del MVP a producción.", tags: ["Node.js", "AWS", "Docker"] },
+        { title: "Automatización e integraciones", text: "Scripts, APIs y agentes de IA que eliminan trabajo repetitivo y conectan tus herramientas.", tags: ["Python", "REST", "Agentes de IA"] },
+        { title: "Diseño UI/UX", text: "Wireframes, prototipos y sistemas de diseño en Figma, listos para desarrollo.", tags: ["Figma", "Prototipos", "Handoff"] },
+      ],
+      cta: "¿No ves tu necesidad? Cuéntamela →",
+    },
     process: [
       { stage: "Descubrir", title: "Entender el problema", text: "Requisitos, usuarios y objetivos antes de dibujar o programar nada." },
       { stage: "Diseñar", title: "Wireframe a alta fidelidad", text: "Flujos y pantallas en Figma, listos para implementar." },
@@ -173,7 +205,12 @@ export const content: Record<Lang, Content> = {
       cv: "Ver CV completo ↗",
       languages: "Español nativo · Inglés C2",
     },
-    contact: { title: "Hablemos", location: "Cali, Colombia · Remoto" },
+    contact: {
+      title: "Hablemos",
+      lead: "¿Tienes un proyecto o una idea? Cuéntamela. Me encantaría saber qué quieres construir.",
+      location: "Cali, Colombia · Remoto",
+      email: "Escríbeme un correo",
+    },
     footer: { top: "Volver arriba ↑" },
   },
 };

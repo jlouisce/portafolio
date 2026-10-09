@@ -32,7 +32,18 @@ export default function Hero() {
       />
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/75 via-black/30 to-black/45" aria-hidden="true" />
 
-      <p className="hero-fade mb-8 font-mono text-xs uppercase tracking-widest text-white/75">00 — {site.role}</p>
+      <div className="hero-fade mb-8 flex items-center justify-between gap-6 font-mono text-xs uppercase tracking-widest">
+        <p className="text-white/75">00 — {site.role}</p>
+        <a
+          href={site.cv}
+          target="_blank"
+          rel="noreferrer"
+          className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-gold/70 bg-black/30 px-5 py-2.5 text-gold shadow-[0_0_24px_-6px_rgba(217,184,102,.55)] backdrop-blur-sm transition duration-300 hover:bg-gold hover:text-black focus-visible:bg-gold focus-visible:text-black"
+        >
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold group-hover:bg-black" aria-hidden="true" />
+          {t.hero.cv}
+        </a>
+      </div>
       <h1 className="font-serif text-[clamp(3.2rem,11vw,10rem)] leading-[0.92] tracking-tight">
         {t.hero.lines.map((l, i) => (
           <span key={l} className="line-mask hero-line">
