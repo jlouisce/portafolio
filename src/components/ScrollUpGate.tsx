@@ -1,7 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 
-/** Si se intenta subir por encima del hero, tapa todo con "Efficient As Fck". */
+/** Cuánto hay que "tirar" hacia arriba estando en el tope para que aparezca (px de scroll). */
+const PULL_TO_SHOW = 320;
+/** Si se deja de tirar este tiempo (ms), el acumulado se reinicia. */
+const PULL_RESET_MS = 600;
+
+/** Al insistir hacia arriba desde el inicio, tapa todo con "Efficient As Fck". */
 export default function ScrollUpGate() {
   const [show, setShow] = useState(false);
 
@@ -9,48 +14,45 @@ export default function ScrollUpGate() {
     const html = document.documentElement;
     const ready = () => html.dataset.intro !== "active" && html.dataset.intro !== undefined;
     const atTop = () => window.scrollY <= 1;
-    const up = () => { if (ready() && atTop()) setShow(true); };
-    const down = () => setShow(false);
 
-    // Aparece en cuanto se sube y se llega cerca del inicio (no hace falta llegar al tope).
-    // Los saltos grandes (clic en el logo o en el menú) se ignoran.
-    let lastY = window.scrollY;
-    let upRun = 0; // distancia acumulada subiendo sin interrupción
-    const onScroll = () => {
-      const y = window.scrollY;
-      const delta = y - lastY;
-      lastY = y;
-      if (Math.abs(delta) > window.innerHeight * 0.5) { upRun = 0; return; }
-      if (delta < 0) {
-        upRun += -delta;
-        if (ready() && y < window.innerHeight * 0.35 && upRun > 160) setShow(true);
-      } else if (delta > 4) {
-        // ignora rebotes mínimos del scroll suave: solo cuenta bajar de verdad
-        upRun = 0;
-        setShow(false);
-      }
+    let pull = 0;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const reset = () => { pull = 0; if (timer) clearTimeout(timer); };
+    const addPull = (amount: number) => {
+      if (!ready() || !atTop()) { reset(); return; }
+      pull += amount;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => { pull = 0; }, PULL_RESET_MS);
+      if (pull >= PULL_TO_SHOW) { reset(); setShow(true); }
     };
+    const down = () => { reset(); setShow(false); };
 
-    const onWheel = (e: WheelEvent) => (e.deltaY < 0 ? up() : e.deltaY > 0 ? down() : undefined);
+    const onWheel = (e: WheelEvent) => {
+      const px = e.deltaMode === 1 ? e.deltaY * 40 : e.deltaY;
+      if (px < 0) addPull(-px);
+      else if (px > 0) down();
+    };
     const onKey = (e: KeyboardEvent) => {
-      if (["ArrowUp", "PageUp", "Home"].includes(e.key)) up();
+      if (e.key === "ArrowUp") addPull(60);
+      else if (e.key === "PageUp" || e.key === "Home") addPull(PULL_TO_SHOW);
       else if (["ArrowDown", "PageDown", "End", " "].includes(e.key)) down();
     };
-    let startY = 0;
-    const onTouchStart = (e: TouchEvent) => { startY = e.touches[0].clientY; };
+    let lastTouchY = 0;
+    const onTouchStart = (e: TouchEvent) => { lastTouchY = e.touches[0].clientY; reset(); };
     const onTouchMove = (e: TouchEvent) => {
-      const dy = e.touches[0].clientY - startY;
-      if (dy > 12) up();
-      else if (dy < -12) down();
+      const y = e.touches[0].clientY;
+      const dy = y - lastTouchY; // dedo hacia abajo = subir en la página
+      lastTouchY = y;
+      if (dy > 0) addPull(dy);
+      else if (dy < -8) down();
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("wheel", onWheel, { passive: true });
     window.addEventListener("keydown", onKey);
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
     return () => {
-      window.removeEventListener("scroll", onScroll);
+      reset();
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("touchstart", onTouchStart);

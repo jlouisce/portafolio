@@ -63,10 +63,15 @@ export default function Intro() {
         .to({}, { duration: 0.06 }, 0.94);
 
       // Fin: el sitio ya está en el borde superior -> se quita la intro y se compensa el scroll
+      let finished = false; // evita que el refresh vuelva a disparar este mismo callback
       ScrollTrigger.create({
         trigger: root,
         start: "bottom top",
-        onEnter: () => {
+        onEnter: (self) => {
+          if (finished) return;
+          finished = true;
+          self.kill();
+          tl.scrollTrigger?.kill();
           const y = Math.max(0, window.scrollY - root.offsetHeight);
           root.style.display = "none";
           html.dataset.intro = "done";
@@ -78,7 +83,8 @@ export default function Intro() {
           } else {
             window.scrollTo(0, y);
           }
-          ScrollTrigger.refresh();
+          // Fuera del callback y con los triggers de la intro ya eliminados
+          requestAnimationFrame(() => ScrollTrigger.refresh());
           window.dispatchEvent(new Event("intro-done"));
         },
       });
