@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import ProjectMedia from "./ProjectMedia";
 import { projects } from "@/data/projects";
 import { useLang } from "./LanguageProvider";
 
@@ -15,12 +16,9 @@ export default function ProjectView({ slug }: { slug: string }) {
       <Link href="/#proyectos" className="font-mono text-xs uppercase tracking-widest text-muted hover:text-accent">{t.projects.back}</Link>
       <p className="mt-16 font-mono text-xs uppercase tracking-widest text-accent">0{i + 1} — {p.type} · {p.year}</p>
       <h1 className="mt-4 font-serif text-[clamp(3rem,10vw,9rem)] leading-[0.95]">{p.title[lang]}</h1>
-      <div
-        className="mt-14 aspect-[16/9] w-full bg-stone"
-        style={{ backgroundImage: `radial-gradient(circle at 30% 20%, hsl(${36 + (p.hue % 12)} 60% ${52 + (p.hue % 18)}% / .5), transparent 60%)` }}
-        role="img"
-        aria-label={`${p.title[lang]} (placeholder)`}
-      />
+      <div className="relative mt-14 aspect-[16/10] w-full overflow-hidden bg-stone ring-1 ring-inset ring-black/5 md:aspect-[5/2]">
+        <ProjectMedia project={p} title={p.title[lang]} sizes="100vw" priority />
+      </div>
       <div className="mt-14 grid gap-10 md:grid-cols-12">
         <p className="font-serif text-3xl leading-snug md:col-span-7 md:text-4xl">{p.summary[lang]}</p>
         <dl className="space-y-6 font-mono text-xs uppercase tracking-widest md:col-span-4 md:col-start-9">

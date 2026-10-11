@@ -7,13 +7,54 @@ export type Project = {
   type: "Web" | "App" | "E-commerce";
   stack: string[];
   summary: Record<Lang, string>;
-  hue: number; // placeholder visual hasta tener capturas reales
+  hue: number; // placeholder visual si el proyecto aún no tiene captura
+  image?: string; // captura en /public (formato ancho ~5:2)
+  visual?: "terminal"; // proyectos sin interfaz (se muestra una vista de terminal)
   repo?: string;
 };
 
 const same = (s: string): Record<Lang, string> => ({ en: s, es: s });
 
 export const projects: Project[] = [
+  {
+    slug: "wantme",
+    title: same("Wantme"),
+    year: "2026",
+    type: "E-commerce",
+    stack: ["Next.js", "Tailwind", "AWS"],
+    summary: {
+      en: "Online store for the Colombian market with a product catalog, item customization, discounts, user accounts, a shopping cart and nationwide shipping. Built for OGX.",
+      es: "Tienda en línea para el mercado colombiano con catálogo, personalización de productos, descuentos, cuentas de usuario, carrito y envíos a todo el país. Construida para OGX.",
+    },
+    hue: 210,
+    image: "/projects/wantme.webp",
+  },
+  {
+    slug: "jgmc",
+    title: same("JGMC"),
+    year: "2026",
+    type: "Web",
+    stack: ["Next.js", "Tailwind", "AWS"],
+    summary: {
+      en: "Bilingual (ES/EN) corporate website for JGMC Human Capital Consulting: services, process, insights and consultation requests. Built for OGX.",
+      es: "Sitio corporativo bilingüe (ES/EN) de JGMC Human Capital Consulting: servicios, proceso, insights y solicitud de asesoría. Construido para OGX.",
+    },
+    hue: 30,
+    image: "/projects/jgmc.webp",
+  },
+  {
+    slug: "ogx",
+    title: same("OGX"),
+    year: "2026",
+    type: "Web",
+    stack: ["Next.js", "Tailwind", "AWS"],
+    summary: {
+      en: "Website for OGX, the software studio I co-founded in Cali: web platforms, online stores and data systems for growing companies. Bilingual EN/ES.",
+      es: "Sitio de OGX, el estudio de software que co-fundé en Cali: plataformas web, tiendas en línea y sistemas de datos para empresas en crecimiento. Bilingüe EN/ES.",
+    },
+    hue: 40,
+    image: "/projects/ogx.webp",
+  },
   {
     slug: "nextdocker",
     title: same("NextDocker"),
@@ -25,6 +66,7 @@ export const projects: Project[] = [
       es: "Marketplace global de contenedores marítimos: el comprador puede cambiar el puerto de origen desde el carrito para ahorrar en flete o llegar más rápido. MVP de frontend con datos de ejemplo; Supabase, Firebase y una API de fletes están planeados.",
     },
     hue: 210,
+    image: "/projects/nextdocker.webp",
     repo: "https://github.com/jlouisce/NextDocker",
   },
   {
@@ -50,6 +92,7 @@ export const projects: Project[] = [
       es: "Diseño de wireframes y pantallas de alta fidelidad, web y móvil, para una plataforma de gestión de asociaciones (AMS).",
     },
     hue: 280,
+    image: "/projects/melora.webp",
   },
   {
     slug: "programa-phoenix",
@@ -62,18 +105,6 @@ export const projects: Project[] = [
       es: "App de la Universidad Icesi para que estudiantes con dificultades académicas fijen metas semanales y exporten su plan a Excel o PNG.",
     },
     hue: 25,
-  },
-  {
-    slug: "wantme-jgmc",
-    title: same("Wantme · JGMC"),
-    year: "2026",
-    type: "E-commerce",
-    stack: ["Next.js", "Tailwind", "AWS"],
-    summary: {
-      en: "Wantme e-commerce platform and JGMC corporate website, from discovery and design to deployment. OGX projects.",
-      es: "Plataforma e-commerce Wantme y sitio corporativo de JGMC, desde el descubrimiento y diseño hasta el despliegue. Proyectos de OGX.",
-    },
-    hue: 150,
   },
   {
     slug: "campus-marketplace",
@@ -94,9 +125,10 @@ export const projects: Project[] = [
     type: "Web",
     stack: ["Python", "Google Maps API", "Pandas"],
     summary: {
-      en: "Lead-generation tool using official Google APIs, with prospect scoring (high, medium, none) exported to Excel.",
-      es: "Herramienta de generación de leads con APIs oficiales de Google y puntuación de prospectos (alta, media, nula) exportada a Excel.",
+      en: "Command-line lead-generation tool: queries official Google APIs with configurable filters, scores each prospect as high, medium or zero conversion probability, and exports the results to an Excel sheet.",
+      es: "Herramienta de terminal para generar leads: consulta las APIs oficiales de Google con filtros configurables, clasifica cada prospecto con probabilidad de conversión alta, media o nula y exporta los resultados a una hoja de Excel.",
     },
     hue: 60,
+    visual: "terminal",
   },
 ];
